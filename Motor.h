@@ -1,6 +1,5 @@
-//
-// Created by Melanie on 17/02/2024.
-//
+// SPDX-FileCopyrightText: 2024 Melanie Thielker & Leonie Gaertner
+// SPDX-License-Identifier: BSD-3-Clause
 
 #ifndef PILOMAR_MOTOR_H
 #define PILOMAR_MOTOR_H

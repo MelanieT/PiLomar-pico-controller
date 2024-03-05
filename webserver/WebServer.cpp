@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2024 Melanie Thielker & Leonie Gaertner
+// SPDX-License-Identifier: BSD-3-Clause
+
 #include "WebServer.h"
 
 #define TCP_PORT 80

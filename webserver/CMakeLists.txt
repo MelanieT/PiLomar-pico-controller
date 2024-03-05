@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2024 Melanie Thielker & Leonie Gaertner
+# SPDX-License-Identifier: BSD-3-Clause
+
 add_library(webserver)
 target_sources(webserver PUBLIC 
     ${CMAKE_CURRENT_LIST_DIR}/ApiServer.cpp

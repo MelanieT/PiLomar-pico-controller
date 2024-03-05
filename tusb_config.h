@@ -1,9 +1,5 @@
-// SPDX-License-Identifier: MIT
-/*
- * Copyright (c) 2021 Álvaro Fernández Rojas <noltari@gmail.com>
- * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
- * Copyright (c) 2020 Damien P. George
- */
+// SPDX-FileCopyrightText: 2024 Melanie Thielker & Leonie Gaertner
+// SPDX-License-Identifier: BSD-3-Clause
 
 #if !defined(_TUSB_CONFIG_H_)
 #define _TUSB_CONFIG_H_

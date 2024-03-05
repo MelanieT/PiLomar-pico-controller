@@ -1,6 +1,5 @@
-//
-// Created by Melanie on 17/02/2024.
-//
+// SPDX-FileCopyrightText: 2024 Melanie Thielker & Leonie Gaertner
+// SPDX-License-Identifier: BSD-3-Clause
 
 // This is the highest wrap resulting in an integral frequency, it represents 1/2 full step per second
 #define MAX_WRAP 62500.0

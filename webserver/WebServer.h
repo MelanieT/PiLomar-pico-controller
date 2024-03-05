@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2024 Melanie Thielker & Leonie Gaertner
+// SPDX-License-Identifier: BSD-3-Clause
+
 #ifndef WEB_SERVER_H
 #define WEB_SERVER_H
 

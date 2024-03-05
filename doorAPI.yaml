@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2024 Melanie Thielker & Leonie Gaertner
+# SPDX-License-Identifier: BSD-3-Clause
+
 openapi: '3.0.2'
 info:
   title: DoorsAPI

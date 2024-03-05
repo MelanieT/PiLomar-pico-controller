@@ -1,6 +1,5 @@
-//
-// Created by Melanie on 11/11/2023.
-//
+// SPDX-FileCopyrightText: 2024 Melanie Thielker & Leonie Gaertner
+// SPDX-License-Identifier: BSD-3-Clause
 
 #ifndef PICOW_WLAN_SETUP_WEBINTERFACE_HTTPRESPONSE_H
 #define PICOW_WLAN_SETUP_WEBINTERFACE_HTTPRESPONSE_H

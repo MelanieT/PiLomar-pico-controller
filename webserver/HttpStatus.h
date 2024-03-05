@@ -1,9 +1,5 @@
-//
-// Created by Melanie on 11/11/2023.
-//
-
-#ifndef PICOW_WLAN_SETUP_WEBINTERFACE_HTTPSTATUS_H
-#define PICOW_WLAN_SETUP_WEBINTERFACE_HTTPSTATUS_H
+#ifndef HTTPSTATUS_H
+#define HTTPSTATUS_H
 
 /*! \file
  *
@@ -250,4 +246,4 @@ namespace HttpStatus
 
 #endif /* HTTPSTATUSCODES_CPP11_H_ */
 
-#endif //PICOW_WLAN_SETUP_WEBINTERFACE_HTTPSTATUS_H
+#endif //HTTPSTATUS_H
