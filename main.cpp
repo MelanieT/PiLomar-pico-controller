@@ -18,7 +18,7 @@
 
 #define MODE_DOOR 0
 #define MODE_CAMERA 1
-#define MODE MODE_DOOR
+#define MODE MODE_CAMERA
 
 #define LED_BLUE  4
 #define LED_GREEN 5
@@ -193,6 +193,12 @@ private:
                 {"open_position", DOOR_MAX_STEPS}
 #elif MODE == MODE_CAMERA
                 {"type", "camera"},
+                {"azimuth", stepper1->getCurrentPosition()},
+                {"elevation", stepper0->getCurrentPosition()},
+                {"max_elevation", ELEVATION_MAX_STEPS},
+                {"max_azimuth", AZIMUTH_MAX_STEPS},
+                {"max_speed_azimuth", AZIMUTH_MAX_SPEED},
+                {"max_speed_elevation", ELEVATION_MAX_SPEED}
 #endif
             }.dump()
         );

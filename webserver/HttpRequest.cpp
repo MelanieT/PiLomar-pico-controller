@@ -51,7 +51,7 @@ HttpRequest::HttpRequest(const char *request)
     {
         m_url = u;
     }
-
+    m_url = std::regex_replace(m_url, std::regex("//*"), "/");
 
     m_body = req.length() > head.length() + 2 ? req.substr(head.length() + 2) : "";
 
