@@ -20,6 +20,7 @@
 #include "cstring"
 #include <cstdlib>
 #include <cstdarg>
+#include <regex>
 #include "pico/stdlib.h"
 #include "WebServer-lwip.h"
 #include "HttpResponse.h"
@@ -204,6 +205,7 @@ void WebServerLwip::RemoveConnectionFromTracker(WebServer_t *State)
             for (j = i; j < mNumPending - 1; j++)
                 mPending[j] = mPending[j + 1];
             mNumPending--;
+            mMessages.erase(State->Id);
 #ifdef DEBUG_WEBSRV
             printf("RemoveConnectionFromTracker: Pending=%d\n", mNumPending);
 #endif
@@ -668,8 +670,17 @@ void WebServerLwip::ProcessMessages(HttpResponse (*Cb)(const char *Request))
         {
         case MSG_REQUEST:
         {
-            HttpResponse response = (*Cb)(Msg.Data);
-            WebServerLwip::Printf(response.ToString().c_str());
+            if (mMessages.count(Msg.Id))
+                mMessages[Msg.Id].append(Msg.Data);
+            else
+                mMessages[Msg.Id] = Msg.Data;
+
+            if (IsValidRequest(mMessages[Msg.Id]))
+            {
+                HttpResponse response = (*Cb)(mMessages[Msg.Id].c_str());
+                WebServerLwip::Printf(response.ToString().c_str());
+                mMessages.erase(Msg.Id);
+            }
             break;
         }
         case MSG_CLOSED:
@@ -677,4 +688,47 @@ void WebServerLwip::ProcessMessages(HttpResponse (*Cb)(const char *Request))
             break;
         }
     } while (Msg.Type != MSG_EMPTY);
+}
+
+bool WebServerLwip::IsValidRequest(std::string req)
+{
+    req = std::regex_replace(req, std::regex("\r"), ""); // Remove CR
+    if (req.find("\n\n") == std::string::npos)
+        return false;
+    auto head = req.substr(0, req.find("\n\n")); // Find first double LF
+    auto m = head.substr(0, head.find('\n'));
+    std::string headers;
+    headers = head.substr(m.length() + 1);
+
+    std::list<std::pair<std::string, std::string>> headerList;
+
+    std::istringstream h(headers);
+    std::string line;
+
+    while (std::getline(h, line))
+    {
+        if (line.find(':') != -1)
+        {
+            auto name = line.substr(0, line.find(':'));
+            auto value = line.substr(name.length() + 1);
+
+            std::transform(name.begin(), name.end(), name.begin(),
+                           [](unsigned char c){ return std::tolower(c); });
+
+            regex_replace(value, std::regex("^ *"), "");
+            headerList.emplace_back(name, value);
+        }
+    }
+
+    auto contentLengthStr = std::find_if(headerList.begin(), headerList.end(), [](auto el){return el.first == "content-length";});
+    int contentLength = 0;
+    if (contentLengthStr != headerList.end())
+    {
+        contentLength = std::stoi((*contentLengthStr).second);
+    }
+
+    if (req.length() < head.length() + 2 + contentLength)
+        return false;
+
+    return true;
 }

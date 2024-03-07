@@ -1,6 +1,7 @@
 #ifndef WEB_SERVER_PICO_H
 #define WEB_SERVER_PICO_H
 
+#include <map>
 #include "WebServer.h"
 
 #include "lwip/tcp.h"
@@ -60,7 +61,7 @@ private:
     int SendMsg(PrivateWebMsg_t Msg);
     static void CloseConnection(struct tcp_pcb *tpcb);
     void CloseClientAndServer();
-
+    static bool IsValidRequest(std::string req);
     // Note that call back functions have to be static
     static err_t TcpServerAccept(void *arg, struct tcp_pcb *client_pcb, err_t err);
     static void TcpServerError(void *arg, err_t err);
@@ -83,6 +84,8 @@ private:
 #define MAX_PENDING 50
     WebServer_t *mPending[MAX_PENDING] = {};
     int mNumPending;
+
+    std::map<unsigned , std::string> mMessages = {};
 };
 
 #endif

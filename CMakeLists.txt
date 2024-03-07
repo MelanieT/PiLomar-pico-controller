@@ -52,6 +52,10 @@ target_include_directories(${PROJECT} PUBLIC
     ${PICO_SDK_PATH}/lib/lwip/src/include/lwip/apps/
     )
 
+#target_compile_definitions(${PROJECT} PRIVATE
+#    -DDEBUG_WEBSRV
+#    )
+
 target_link_libraries(${PROJECT}
     pico_stdlib
     pico_unique_id
