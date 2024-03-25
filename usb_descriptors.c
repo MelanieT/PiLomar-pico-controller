@@ -6,14 +6,8 @@
 
 #define WITH_CDC
 
-/* A combination of interfaces must have a unique product id, since PC will save device driver after the first plug.
- * Same VID/PID with different interface e.g MSC (first), then CDC (later) will possibly cause system error on PC.
- *
- * Auto ProductID layout's Bitmap:
- *   [MSB]       NET | VENDOR | MIDI | HID | MSC | CDC          [LSB]
- */
-#define _PID_MAP(itf, n)  ( (CFG_TUD_##itf) << (n) )
-#define USB_PID           (0x4000 | _PID_MAP(CDC, 0) | _PID_MAP(NET, 5) )
+// Official Pilomar USB VID/PID 1209/abff
+#define USB_PID           0xabff
 
 #define USBD_CDC_0_EP_CMD 0x83
 #define USBD_CDC_1_EP_CMD 0x85
@@ -75,7 +69,7 @@ tusb_desc_device_t const desc_device =
     
     .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,
 
-    .idVendor           = 0xCafe,
+    .idVendor           = 0x1209,
     .idProduct          = USB_PID,
     .bcdDevice          = 0x0101,
 
